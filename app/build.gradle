@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+
+//配置Android annotations
+apply plugin: 'android-apt'
+def AAVersion = '3.3.2'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "com.alibaba.sdk.trade.demo"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("./debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file("./debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+           /* ndk {
+                abiFilters "armeabi","armeabi-v7a","x86"
+            }*/
+        }
+    }
+
+   /* sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }*/
+/*
+    productFlavors {
+        afterABI {
+            ndk {
+                abiFilters "armeabi","armeabi-v7a","x86"
+            }
+        }
+    }*/
+
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+//配置Android annotations
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0]?.processResources?.manifestFile
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile(name: 'alisdk-kernel-3.0.3.2', ext: 'aar')
+    compile(name: 'alisdk-kernel-base-3.0.3.2', ext: 'aar')
+    compile(name: 'alisdk-login-3.0.3.2', ext: 'aar')
+    compile(name: 'alisdk-rpc-3.0.3.2', ext: 'aar')
+    compile(name: 'alisdk-security-3.0.3.2', ext: 'aar')
+    compile(name: 'alisdk-system-3.0.3.2', ext: 'aar')
+    compile(name: 'alisdk-ui-3.0.3.2', ext: 'aar')
+    compile(name: 'nbsdk-trade-3.0.3.2', ext: 'aar')
+    //配置Android annotations
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+    //配置Android annotations
+    apt "org.androidannotations:androidannotations:$AAVersion"
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+}
