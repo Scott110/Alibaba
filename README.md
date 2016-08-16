@@ -5,6 +5,9 @@
 jenkins 需要搭建需要注意的地方
  用命令行去下载，不要用官网下载的包，会有意向不到的问题
  
+ 安装完成后
+ jenkins 命令启动 Jenkins
+ 
  需要配置的地方 全局参数sdk,ndk
  
   ![image](https://github.com/Scott110/Alibaba/blob/master/snapshot/1.png)
