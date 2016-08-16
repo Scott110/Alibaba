@@ -23,4 +23,6 @@ jenkins 需要搭建需要注意的地方
   
  集成好的包发布到fir.im 中  changlog.txt 位版本日志
  
+ jenkins-build.sh 为 打包的shell 脚本可以灵活更改
+ 
  
